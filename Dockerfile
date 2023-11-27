@@ -6,7 +6,7 @@ LABEL "com.github.actions.icon"="refresh-cw"
 LABEL "com.github.actions.color"="green"
 
 LABEL version="0.5.1"
-LABEL repository="https://github.com/early-steps/s3-sync-action"
+LABEL repository="https://github.com/early-steps/s3sync-action"
 LABEL homepage="https://earlysteps.co/"
 LABEL maintainer="Early Steps <support@earlysteps.co>"
 
@@ -14,6 +14,8 @@ LABEL maintainer="Early Steps <support@earlysteps.co>"
 ENV AWSCLI_VERSION='1.18.14'
 
 RUN pip install --quiet --no-cache-dir awscli==${AWSCLI_VERSION}
+RUN pip install jq
+
 
 ADD entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
