@@ -3,14 +3,14 @@
 set -e
 
 
-if [ -z "$AWS_ROLE_TO_ASSUME" ]; then
-  echo "AWS_ROLE_TO_ASSUME is not set. Quitting"
-  exit 1
-fi
+# if [ -z "$AWS_ROLE_TO_ASSUME" ]; then
+#   echo "AWS_ROLE_TO_ASSUME is not set. Quitting"
+#   exit 1
+# fi
 
 echo $aws_access_key_id
 echo $aws_secret_access_key
-sh -c "assumed_role=$(aws sts assume-role --role-arn $AWS_ROLE_TO_ASSUME --role-session-name bucketSession)"
+# sh -c "assumed_role=$(aws sts assume-role --role-arn $AWS_ROLE_TO_ASSUME --role-session-name bucketSession)"
 
 export AWS_ACCESS_KEY_ID=$(echo $assumed_role | jq -r .Credentials.AccessKeyId)
 export AWS_SECRET_ACCESS_KEY=$(echo $assumed_role | jq -r .Credentials.SecretAccessKey)
