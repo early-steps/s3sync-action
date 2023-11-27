@@ -2,6 +2,10 @@
 
 set -e
 
+echo "AWS_ACCESS_KEY_ID $AWS_ACCESS_KEY_ID"
+echo "AWS_SECRET_ACCESS_KEY $AWS_SECRET_ACCESS_KEY"
+echo "AWS_SESSION_TOKEN $AWS_SESSION_TOKEN"
+
 if [ -z "$AWS_S3_BUCKET" ]; then
   echo "AWS_S3_BUCKET is not set. Quitting."
   exit 1
