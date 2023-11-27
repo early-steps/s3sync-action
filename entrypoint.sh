@@ -3,7 +3,7 @@
 set -e
 
 
-if [-z "$AWS_ROLE_TO_ASSUME"]; then
+if [ -z "$AWS_ROLE_TO_ASSUME" ]; then
   echo "AWS_ROLE_TO_ASSUME is not set. Quitting"
   exit 1
 fi
