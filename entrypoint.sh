@@ -2,20 +2,6 @@
 
 set -e
 
-
-# if [ -z "$AWS_ROLE_TO_ASSUME" ]; then
-#   echo "AWS_ROLE_TO_ASSUME is not set. Quitting"
-#   exit 1
-# fi
-
-echo $aws_access_key_id
-echo $aws_secret_access_key
-# sh -c "assumed_role=$(aws sts assume-role --role-arn $AWS_ROLE_TO_ASSUME --role-session-name bucketSession)"
-
-export AWS_ACCESS_KEY_ID=$(echo $assumed_role | jq -r .Credentials.AccessKeyId)
-export AWS_SECRET_ACCESS_KEY=$(echo $assumed_role | jq -r .Credentials.SecretAccessKey)
-export AWS_SESSION_TOKEN=$(echo $assumed_role | jq -r .Credentials.SessionToken)
-
 if [ -z "$AWS_S3_BUCKET" ]; then
   echo "AWS_S3_BUCKET is not set. Quitting."
   exit 1
@@ -28,6 +14,11 @@ fi
 
 if [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
   echo "AWS_SECRET_ACCESS_KEY is not set. Quitting."
+  exit 1
+fi
+
+if [ -z "$AWS_SESSION_TOKEN" ]; then
+  echo "AWS_SESSION_TOKEN is not set. Quitting."
   exit 1
 fi
 
@@ -48,6 +39,7 @@ aws configure --profile s3-sync-action <<-EOF > /dev/null 2>&1
 ${AWS_ACCESS_KEY_ID}
 ${AWS_SECRET_ACCESS_KEY}
 ${AWS_REGION}
+${AWS_SESSION_TOKEN}
 text
 EOF
 
