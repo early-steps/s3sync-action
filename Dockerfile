@@ -14,8 +14,7 @@ LABEL maintainer="Early Steps <support@earlysteps.co>"
 ENV AWSCLI_VERSION='1.18.14'
 
 RUN pip install --quiet --no-cache-dir awscli==${AWSCLI_VERSION}
-RUN sudo apt-get update
-RUN sudo apt-get install jq
+RUN pip install --quiet --no-cache-dir jq
 
 
 ADD entrypoint.sh /entrypoint.sh
